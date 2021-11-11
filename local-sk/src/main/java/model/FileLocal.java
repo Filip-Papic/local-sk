@@ -4,6 +4,22 @@ import users.User;
 
 public class FileLocal implements File{
 
+	
+	private String name;
+	private Directory directory;
+	
+	public FileLocal(String name) {
+		super();
+		this.name = name;
+	}
+	
+	public FileLocal(String name, Directory directory) {
+		super();
+		this.name = name;
+		this.directory = directory;
+	}
+
+
 	public void create(String path, String name) {
 		
 	}
@@ -56,4 +72,21 @@ public class FileLocal implements File{
 		
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Directory getDirectory() {
+		return directory;
+	}
+
+	public void setDirectory(Directory directory) {
+		this.directory = directory;
+	}
+
+	
 }

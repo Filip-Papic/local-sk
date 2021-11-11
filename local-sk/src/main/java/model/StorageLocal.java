@@ -1,5 +1,7 @@
 package model;
 
+import java.io.File;
+
 import users.User;
 
 public class StorageLocal implements Storage{
@@ -23,5 +25,30 @@ public class StorageLocal implements Storage{
 	public int setSize(int size) {
 		return 0;
 	}
+
+	public Directory rootDirectory(String path) {
+		
+		File file = new File(path);
+		Directory rootDirectory = new DirectoryLocal(); ///nzm
+		
+		file.mkdirs();
+						//.....
+		return null;
+	}
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
