@@ -76,8 +76,12 @@ public class FileLocal implements File{
 	public void lookup(String path, String name) {
 		
 	}
+	
+	public void downloadDrive(String name, String id) {
+		
+	}
 
-	public void download(String path, String name) {
+	public void uploadDrive(String name, String id) {
 		
 	}
 
@@ -129,5 +133,4 @@ public class FileLocal implements File{
 		this.directory = directory;
 	}
 
-	
 }

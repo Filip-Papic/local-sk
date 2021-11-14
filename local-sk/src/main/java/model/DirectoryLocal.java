@@ -1,14 +1,18 @@
 package model;
 
+import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
+import org.apache.commons.io.FileUtils;
 
 import users.User;
 
 public class DirectoryLocal implements Directory{
 
 	private String name;
+	private String path;
 	private Directory directory;
 	//private boolean isRoot;
 	
@@ -36,7 +40,16 @@ public class DirectoryLocal implements Directory{
 */	}
 
 	public void delete(String path, String name) {
-		
+        Path dirPath = Paths.get(path);
+        if(Files.exists(dirPath)){
+            try{
+                java.io.File file = new File(path);
+                FileUtils.deleteDirectory(file);
+            }
+            catch(Exception e){
+                e.printStackTrace();
+            }
+        }
 	}
 
 	public int fileCount(int fileCount) {
@@ -65,6 +78,14 @@ public class DirectoryLocal implements Directory{
 
 	public void setDirectory(Directory directory) {
 		this.directory = directory;
+	}
+
+	public String getPath() {
+		return path;
+	}
+
+	public void setPath(String path) {
+		this.path = path;
 	}
 
 }
