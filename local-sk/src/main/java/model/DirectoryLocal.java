@@ -1,9 +1,11 @@
 package model;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 
 import org.apache.commons.io.FileUtils;
 
@@ -52,6 +54,20 @@ public class DirectoryLocal implements Directory{
         }
 	}
 
+	public void move(String path1, String path2) {
+		Path start = Paths.get(path1);
+		Path finish = Paths.get(path2);
+		
+		if(Files.exists(start) && Files.exists(finish)) {
+			try {
+				FileUtils.moveDirectory(new File(path1), new File(path2 + java.io.File.separator + 
+											path1.substring(path1.lastIndexOf(java.io.File.separator) + 1)));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
 	public int fileCount(int fileCount) {
 		return 0;
 	}

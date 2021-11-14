@@ -1,5 +1,7 @@
 package model;
 
+import java.io.File;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -8,7 +10,7 @@ import java.nio.file.StandardCopyOption;
 
 import users.User;
 
-public class FileLocal implements File{
+public class FileLocal implements model.File{
 
 	
 	private String name;
@@ -67,22 +69,22 @@ public class FileLocal implements File{
 											path1.substring(path1.lastIndexOf(java.io.File.separator) + 1)), 
 											StandardCopyOption.REPLACE_EXISTING);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 	}
 
-	public void lookup(String path, String name) {
-		
-	}
-	
-	public void downloadDrive(String name, String id) {
-		
-	}
-
-	public void uploadDrive(String name, String id) {
-		
+	public File[] lookup(String path, String name) { //tj. find
+		java.io.File file = new File(path);
+		final String string = path;
+		File[] matches = file.listFiles(new FilenameFilter()
+		{
+			public boolean accept(File dir, String name)
+			{
+				return name.startsWith(string); //&& name.endsWith(); za ekstenzije 
+			}
+		});
+		return matches; // nzm ne radi
 	}
 
 	public void lookupAllFilesinDir(String path, String name) {
@@ -116,7 +118,14 @@ public class FileLocal implements File{
 	public void checkPrivilegeFile(User user) {
 		
 	}
+	
+	public void downloadDrive(String name, String id) {
+		
+	}
 
+	public void uploadDrive(String name, String id) {
+		
+	}
 	public String getName() {
 		return name;
 	}
