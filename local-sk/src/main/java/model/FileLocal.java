@@ -1,5 +1,11 @@
 package model;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+
 import users.User;
 
 public class FileLocal implements File{
@@ -8,7 +14,7 @@ public class FileLocal implements File{
 	private String name;
 	private Directory directory;
 	
-	public FileLocal(String name) {
+/*	public FileLocal(String name) {
 		super();
 		this.name = name;
 	}
@@ -18,18 +24,53 @@ public class FileLocal implements File{
 		this.name = name;
 		this.directory = directory;
 	}
-
+*/
 
 	public void create(String path, String name) {
+		Path path2 = null;
+		if(path != null && path.length() > 0)
+			path2 = Paths.get(path);
 		
+		Path path3 = Paths.get(path2 + java.io.File.separator + name);
+		
+		if(Files.exists(path2) && Files.exists(path3) == false) {
+			try {
+				Files.createFile(path3);
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
+		}
 	}
 
 	public void delete(String path, String name) {
-		
+
+		Path path2 = Paths.get(path);
+				
+		if(Files.exists(path2)) {
+			try {
+				Files.delete(path2);
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
+		}
 	}
 
-	public void move(String path, String name) {
+	public void move(String path1, String path2) {
+		Path start = Paths.get(path1);
+		Path finish = Paths.get(path2);
 		
+		if(Files.exists(start) && Files.exists(finish)) {
+			try {
+				Files.move(start, Paths.get(finish + java.io.File.separator + 
+											path1.substring(path1.lastIndexOf(java.io.File.separator) + 1)), 
+											StandardCopyOption.REPLACE_EXISTING);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 
 	public void lookup(String path, String name) {
