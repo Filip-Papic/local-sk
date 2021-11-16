@@ -4,26 +4,29 @@ import java.io.File;
 
 import users.User;
 
-public class StorageLocal implements Storage{
+public class StorageLocal implements Storage {
 
+	private String path;
+    private String name;
+    private User user;
+    
 	public String getPath() {
-		return null;
+		return path;
 	}
 
 	public String getName() {
-		return null;
+		return name;
 	}
 
 	public User getUser() {
-		return null;
+		return user;
 	}
 
 	public boolean auth(String username, String password) {
+		if(username.equals("u") && password.equals("p")){
+			return true;
+		}
 		return false;
-	}
-
-	public int setSize(int size) {
-		return 0;
 	}
 
 	public Directory rootDirectory(String path) {
@@ -34,6 +37,10 @@ public class StorageLocal implements Storage{
 		file.mkdirs();
 						//.....
 		return null;
+	}
+
+	public int setSize(int size) {
+		return 5;
 	}
 	
 }
