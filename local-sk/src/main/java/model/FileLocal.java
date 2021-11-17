@@ -44,10 +44,19 @@ public class FileLocal implements model.File{
 			}
 		}
 	}
+	
+	public void createMultiple(String path, String name, int amount) {
+		// TODO Auto-generated method stub
+		for(int i = 0; i < amount;i++) {
+			create(path, name + (i+1));
+		}
+		
+	}
 
 	public void delete(String path, String name) {
 
-		Path path2 = Paths.get(path);
+		Path path2 = Paths.get(path + "\\" + name);
+		//Path path3 = Paths.get(name);
 				
 		if(Files.exists(path2)) {
 			try {
@@ -75,6 +84,7 @@ public class FileLocal implements model.File{
 	}
 
 	public File[] lookup(String path, String name) { //tj. find
+		
 		java.io.File file = new File(path);
 		final String string = path;
 		File[] matches = file.listFiles(new FilenameFilter()
@@ -85,6 +95,22 @@ public class FileLocal implements model.File{
 			}
 		});
 		return matches; // nzm ne radi
+		
+		/*
+		File[] list = file.listFiles();
+        if(list!=null)
+        for (File fil : list)
+        {
+            if (fil.isDirectory())
+            {
+                findFile(name,fil);
+            }
+            else if (name.equalsIgnoreCase(fil.getName()))
+            {
+                System.out.println(fil.getParentFile());
+            }
+        }
+        */
 	}
 
 	public void lookupAllFilesinDir(String path, String name) {

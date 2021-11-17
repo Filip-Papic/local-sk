@@ -10,6 +10,28 @@ public class StorageLocal implements Storage {
     private String name;
     private User user;
     
+    
+    public void create(String path, String name){
+    	// TODO Auto-generated method stub
+    	@SuppressWarnings("deprecation")
+		FileLocal file;
+		try {
+			file = (FileLocal) Class.forName("model.FileLocal").newInstance();
+			file.create(path, name);
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+    	
+    }
+    
 	public String getPath() {
 		return path;
 	}
@@ -19,7 +41,8 @@ public class StorageLocal implements Storage {
 	}
 
 	public User getUser() {
-		return user;
+		System.out.println("test");
+		return null;
 	}
 
 	public boolean auth(String username, String password) {
