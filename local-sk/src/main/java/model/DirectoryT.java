@@ -11,7 +11,7 @@ import org.apache.commons.io.FileUtils;
 
 import users.User;
 
-public class DirectoryLocal implements Directory{
+public class DirectoryT implements Directory{
 
 	private String name;
 	private String path;
@@ -102,6 +102,11 @@ public class DirectoryLocal implements Directory{
 
 	public void setPath(String path) {
 		this.path = path;
+	}
+
+	public void createMultiple(String path, String name, int amount) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

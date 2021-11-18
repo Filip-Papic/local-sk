@@ -4,19 +4,19 @@ import java.io.File;
 
 import users.User;
 
-public class StorageLocal implements Storage {
+public class StorageT implements Storage {
 
 	private String path;
     private String name;
     private User user;
     
     
-    public void create(String path, String name){
+    @SuppressWarnings("deprecation")
+	public void create(String path, String name){
     	// TODO Auto-generated method stub
-    	@SuppressWarnings("deprecation")
-		FileLocal file;
+		FileT file;
 		try {
-			file = (FileLocal) Class.forName("model.FileLocal").newInstance();
+			file = (FileT) Class.forName("model.FileLocal").newInstance();
 			file.create(path, name);
 		} catch (InstantiationException e) {
 			// TODO Auto-generated catch block
@@ -55,7 +55,7 @@ public class StorageLocal implements Storage {
 	public Directory rootDirectory(String path) {
 		
 		File file = new File(path);
-		Directory rootDirectory = new DirectoryLocal(); ///nzm
+		Directory rootDirectory = new DirectoryT(); ///nzm
 		
 		file.mkdirs();
 						//.....
@@ -64,6 +64,46 @@ public class StorageLocal implements Storage {
 
 	public int setSize(int size) {
 		return 5;
+	}
+
+	public void createDir(String path, String name) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void createMultipleDirs(String path, String name, int i) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void deleteDir(String path, String name) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void moveDir(String path1, String path2) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void createFile(String path, String name) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void createMultipleFiles(String path, String name, int i) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void deleteFile(String path, String name) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void moveFile(String path1, String path2) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

@@ -10,7 +10,7 @@ import java.nio.file.StandardCopyOption;
 
 import users.User;
 
-public class FileLocal implements model.File{
+public class FileT implements model.File{
 
 	
 	private String name;
