@@ -16,7 +16,7 @@ public class StorageT implements Storage {
     	// TODO Auto-generated method stub
 		FileT file;
 		try {
-			file = (FileT) Class.forName("model.FileLocal").newInstance();
+			file = (FileT) Class.forName("model.FileT").newInstance();
 			file.create(path, name);
 		} catch (InstantiationException e) {
 			// TODO Auto-generated catch block
@@ -104,6 +104,31 @@ public class StorageT implements Storage {
 	public void moveFile(String path1, String path2) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public void uploadFile(String dest, String... paths) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void downloadFile(String... paths) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void listFilesInDir(String fileID) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void listDirsInDir(String fileID) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public Directory rootDirectory() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

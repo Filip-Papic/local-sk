@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.Date;
 
 import users.User;
 
@@ -113,59 +114,76 @@ public class FileT implements model.File{
         */
 	}
 
-	public void lookupAllFilesinDir(String path, String name) {
+	@Override
+	public void upload(String path, String dest) {
+		// TODO Auto-generated method stub
 		
 	}
 
-	public void lookupAllFilesInWholeDir(String path, String name) {
+	@Override
+	public void download(String path) {
+		// TODO Auto-generated method stub
 		
 	}
 
-	public void lookupAllFilesWithExtension(String path, String name) {
-		
-	}
-
-	public void lookupAllFilesSortedName(String path, String name) {
-		
-	}
-
-	public void lookupAllFilesSortedDate(String path, String name) {
-		
-	}
-
-	public void lookupAllFilesSortedEdit(String path, String name) {
-		
-	}
-
-	public void lookupAllFilesInDate(String path, String name) {
-		
-	}
-
-	public void checkPrivilegeFile(User user) {
-		
-	}
-	
+	@Override
 	public void downloadDrive(String name, String id) {
+		// TODO Auto-generated method stub
 		
 	}
 
+	@Override
 	public void uploadDrive(String name, String id) {
+		// TODO Auto-generated method stub
 		
 	}
-	public String getName() {
-		return name;
+
+	@Override
+	public void lookupAllFilesinDir(String path) {
+		// TODO Auto-generated method stub
+		
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	@Override
+	public void lookupAllFilesInWholeDir(String path, String name) {
+		// TODO Auto-generated method stub
+		
 	}
 
-	public Directory getDirectory() {
-		return directory;
+	@Override
+	public void lookupAllFilesWithExtension(String path, String ext) {
+		// TODO Auto-generated method stub
+		
 	}
 
-	public void setDirectory(Directory directory) {
-		this.directory = directory;
+	@Override
+	public void lookupAllFilesSortedName(String path) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void lookupAllFilesSortedDate(String path) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void lookupAllFilesSortedEdit(String path) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void lookupAllFilesInDate(String path, Date date) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void checkPrivilegeFile(User user) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

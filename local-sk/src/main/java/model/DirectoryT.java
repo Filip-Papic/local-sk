@@ -5,8 +5,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
-
 import org.apache.commons.io.FileUtils;
 
 import users.User;
@@ -68,6 +66,12 @@ public class DirectoryT implements Directory{
 		}
 	}
 	
+	public void createMultiple(String path, String name, int amount) {
+		for(int i = 0; i < amount;i++) {
+			create(path, name + (i+1));
+		}
+		
+	}
 	public int fileCount(int fileCount) {
 		return 0;
 	}
@@ -102,11 +106,6 @@ public class DirectoryT implements Directory{
 
 	public void setPath(String path) {
 		this.path = path;
-	}
-
-	public void createMultiple(String path, String name, int amount) {
-		// TODO Auto-generated method stub
-		
 	}
 
 }
