@@ -3,31 +3,25 @@ package model;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
+import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import users.User;
 
 public class FileT implements model.File{
-
-	
-	private String name;
-	private Directory directory;
-	
-/*	public FileLocal(String name) {
-		super();
-		this.name = name;
-	}
-	
-	public FileLocal(String name, Directory directory) {
-		super();
-		this.name = name;
-		this.directory = directory;
-	}
-*/
 
 	public void create(String path, String name) {
 		Path path2 = null;
@@ -84,106 +78,120 @@ public class FileT implements model.File{
 		}
 	}
 
-	public File[] lookup(String path, String name) { //tj. find
+	public List<String> lookup(String path, String name) { //tj. find
 		
-		java.io.File file = new File(path);
-		final String string = path;
-		File[] matches = file.listFiles(new FilenameFilter()
-		{
-			public boolean accept(File dir, String name)
-			{
-				return name.startsWith(string); //&& name.endsWith(); za ekstenzije 
-			}
-		});
-		return matches; // nzm ne radi
-		
-		/*
-		File[] list = file.listFiles();
-        if(list!=null)
-        for (File fil : list)
-        {
-            if (fil.isDirectory())
-            {
-                findFile(name,fil);
-            }
-            else if (name.equalsIgnoreCase(fil.getName()))
-            {
-                System.out.println(fil.getParentFile());
-            }
-        }
-        */
+		List<String> result = null;
+
+        try (Stream<Path> walk = Files.walk(Paths.get(path))) {
+            result = walk
+                    .filter(p -> !Files.isDirectory(p))
+                    .map(p -> p.toString().toLowerCase())
+                    .filter(f -> f.endsWith(name))
+                    .collect(Collectors.toList());
+        } catch (IOException e) {
+			e.printStackTrace();
+		}
+        System.out.println(result);
+        return result;
 	}
 
 	@Override
-	public void upload(String path, String dest) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void download(String path) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void downloadDrive(String name, String id) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void uploadDrive(String name, String id) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void lookupAllFilesinDir(String path) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void lookupAllFilesInWholeDir(String path, String name) {
-		// TODO Auto-generated method stub
-		
+	public Set<String> lookupAllFilesinDir(String path) {
+		Set<String> fileList = new HashSet<>();
+	    try (DirectoryStream<Path> stream = Files.newDirectoryStream(Paths.get(path))) {
+	        for (Path path2 : stream) {
+	            if (!Files.isDirectory(path2)) {
+	                fileList.add(path2.getFileName()
+	                    .toString());
+	            }
+	        }
+	    } catch (IOException e) {
+			e.printStackTrace();
+		}
+	    System.out.println(fileList);
+	    return fileList;
 	}
 
 	@Override
 	public void lookupAllFilesWithExtension(String path, String ext) {
-		// TODO Auto-generated method stub
-		
+		List<String> files = lookup(path, ext);
+        files.forEach(x -> System.out.println(x));
+        System.out.println(files);
 	}
 
 	@Override
 	public void lookupAllFilesSortedName(String path) {
-		// TODO Auto-generated method stub
-		
+		Set<String> files = lookupAllFilesinDir(path);
+		List<String> sortedList = new ArrayList<>(files);
+		Collections.sort(sortedList);
+        sortedList.forEach(x -> System.out.println(x));
+        System.out.println(sortedList);
 	}
 
 	@Override
 	public void lookupAllFilesSortedDate(String path) {
-		// TODO Auto-generated method stub
-		
+		File file = new File(path);
+		File[] files = file.listFiles();
+
+		Arrays.sort(files, new Comparator<File>(){
+		    public int compare(File f1, File f2)
+		    {
+		        return Long.valueOf(f1.lastModified()).compareTo(f2.lastModified());
+		    } });
+		for (File file1 : files) {
+			System.out.println(" " + file1.getName() + " " + file1.lastModified());
+		}
+
 	}
 
 	@Override
 	public void lookupAllFilesSortedEdit(String path) {
-		// TODO Auto-generated method stub
-		
+		File file = new File(path);
+		File[] files = file.listFiles();
+
+		Arrays.sort(files, new Comparator<File>(){
+		    public int compare(File f1, File f2)
+		    {
+		        return Long.valueOf(f1.lastModified()).compareTo(f2.lastModified());
+		    } });
+		for (File file1 : files) {
+			System.out.println(" " + file1.getName() + " " + file1.lastModified());
+		}
 	}
 
 	@Override
 	public void lookupAllFilesInDate(String path, Date date) {
-		// TODO Auto-generated method stub
-		
+		//nzm
 	}
 
 	@Override
+	public void lookupAllFilesInWholeDir(String path, String name) {
+		//vec ima gore
+	}
+	
+	@Override
 	public void checkPrivilegeFile(User user) {
-		// TODO Auto-generated method stub
-		
+		//useri
+	}
+
+	@Override
+	public void download(String path) {
+		//drive
+	}
+
+	@Override
+	public void upload(String path, String dest) {
+		//drive
+	}
+
+	@Override
+	public void downloadDrive(String name, String id) {
+		//drive
+	}
+
+	@Override
+	public void uploadDrive(String name, String id) {
+		//drive
 	}
 
 }
